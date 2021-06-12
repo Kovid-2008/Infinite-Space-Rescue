@@ -5,6 +5,7 @@ var enemy2,enemy2Img;
 var enemy3,enemy3Img;
 var astronaut,astronautImg;
 var astroG,enemy1G,enemy2G,enemy3G;
+var backgroundSound,explosion;
 var score = 0;
 var play;
 var end;
@@ -19,6 +20,9 @@ function preload(){
   enemy2Img=loadImage("enemy2.png");
   enemy3Img=loadImage("enemy3.png");
   astronautImg=loadImage("astronaut.png");
+  backgroundSound=loadSound("interstellar-space-preview-full.mp3");
+  explosion=loadSound("preview.mp3");
+  
   
 
 }
@@ -43,6 +47,7 @@ function setup() {
 function draw() {
   background(0);
   if(gameState === "play"){
+    backgroundSound.loop();
   if(backgrounds.y === 400){
     backgrounds.y = 250;
   }
@@ -68,6 +73,7 @@ function draw() {
   text("Score: " + score,490,30);
   
   if(enemy1G.isTouching(player) || enemy2G.isTouching(player) || enemy3G.isTouching(player)){
+    explosion.playSound();
     gameState="end";
   }
     createEdgeSprites();
